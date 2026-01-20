@@ -3,20 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的个人主页</title>
+  <title>XJM的个人主页</title>
   <style>
     /* 这里是CSS，用来控制网页长什么样 */
     body {
       font-family: 'Arial', sans-serif;
-      text-align: center; /* 让所有内容居中 */
-      background-color: #f0f2f5; /* 浅灰背景，不刺眼 */
-      margin-top: 50px;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      /* 这一行很重要，防止视频溢出产生滚动条 */
+      overflow-x: hidden;
+    }
+    /* 这是专门控制背景视频的 */
+    #bg-video {
+      position: fixed;  /* 固定在窗口，不随页面滚动 */
+      right: 0;
+      bottom: 0;
+      min-width: 100%;  /* 保证宽度撑满 */
+      min-height: 100%; /* 保证高度撑满 */
+      width: auto;
+      height: auto;
+      z-index: -100;    /* 关键！层级设为负数，让它乖乖待在最底层 */
+      object-fit: cover; /* 保证视频画面不被拉伸变形 */
+
+      /* 可选：给视频加一点暗色滤镜，让你的文字更清晰 (0.6就是60%亮度) */
+      filter: brightness(0.6);
     }
     h1 {
       color: #333; /* 标题颜色 */
     }
     .container {
-      background-color: white;
+      /* 0.85 代表 85% 不透明度，你可以自己调 (0~1之间) */
+      background-color: rgba(255, 255, 255, 0.85);
       width: 60%;
       margin: 0 auto; /* 盒子居中 */
       padding: 40px;
@@ -38,7 +56,9 @@
   </style>
 </head>
 <body>
-
+<video autoplay muted loop id="bg-video">
+  <source src="video-bg.mp4" type="video/mp4">
+</video>
 <div class="container">
   <img src="avatar.jpg" alt="我的头像" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
   <h1>你好，我是 XJM 👋</h1>
@@ -51,7 +71,27 @@
     <li>🚧 学习构建网页</li>
     <li>📅 准备学习如何在网页上发表自己的游戏</li>
   </ul>
+  <hr> <h3>🛠️ 我的技术栈</h3>
 
+  <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px;">
+
+            <span style="background-color: #e6f7ff; border: 1px solid #91d5ff; color: #0050b3; padding: 5px 15px; border-radius: 20px; font-weight: bold;">
+                Java ☕
+            </span>
+
+    <span style="background-color: #fff7e6; border: 1px solid #ffd591; color: #d46b08; padding: 5px 15px; border-radius: 20px; font-weight: bold;">
+                C / C++ ⚙️
+            </span>
+
+    <span style="background-color: #f6ffed; border: 1px solid #b7eb8f; color: #389e0d; padding: 5px 15px; border-radius: 20px; font-weight: bold;">
+                Unity 🎮
+            </span>
+
+    <span style="background-color: #fff0f6; border: 1px solid #ffadd2; color: #c41d7f; padding: 5px 15px; border-radius: 20px; font-weight: bold;">
+                Git & GitHub 🐙
+            </span>
+
+  </div>
   <br><br>
   <a href="https://github.com/StarXUz" target="_blank" style="text-decoration: none;">
     <button style="cursor: pointer;">
@@ -77,6 +117,22 @@
     </p>
     <span style="font-size: 12px; background-color: #eee; padding: 3px 8px; border-radius: 4px;">Java</span>
     <span style="font-size: 12px; background-color: #eee; padding: 3px 8px; border-radius: 4px;">Note</span>
+  </div>
+  <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; text-align: left; margin-bottom: 15px; border-left: 5px solid #28a745;">
+    <h4 style="margin: 0; color: #333;">🌻 植物大战僵尸 (Dev)</h4> <p style="font-size: 14px; color: #666; margin: 5px 0;">
+    🚧 <b>WIP (Work In Progress)</b><br>
+    正在用 C 语言重构游戏底层逻辑。目前已实现植物选择与拖拽到草坪功能。
+    <br>
+    <a href="https://github.com/StarXUz/PvZ-C-Remake" target="_blank" style="color: #0366d6; text-decoration: none;">👉 围观我的开发进度</a>
+  </p>
+    <span style="font-size: 12px; background-color: #eee; padding: 3px 8px; border-radius: 4px;">C Language</span>
+    <span style="font-size: 12px; background-color: #ffd700; color: #000; padding: 3px 8px; border-radius: 4px;">Building...</span>
+  </div>
+  <div style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px;">
+    <p style="color: #aaa; font-size: 12px;">
+      © 2026 XJM. <br>
+      Powered by GitHub Pages & My Coding Passion.
+    </p>
   </div>
 </div>
 
