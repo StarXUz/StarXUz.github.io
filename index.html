@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的个人主页</title>
+  <style>
+    /* 这里是CSS，用来控制网页长什么样 */
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center; /* 让所有内容居中 */
+      background-color: #f0f2f5; /* 浅灰背景，不刺眼 */
+      margin-top: 50px;
+    }
+    h1 {
+      color: #333; /* 标题颜色 */
+    }
+    .container {
+      background-color: white;
+      width: 60%;
+      margin: 0 auto; /* 盒子居中 */
+      padding: 40px;
+      border-radius: 10px; /* 圆角看起来更现代 */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 加一点阴影 */
+    }
+    button {
+      background-color: #f700ff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0056b3; /* 鼠标放上去变色 */
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <img src="avatar.jpg" alt="我的头像" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <h1>你好，我是 XJM 👋</h1>
+  <p>这是我从零开始构建的第一个个人网页。</p>
+  <p>我是一名热衷于 java 和游戏开发的大学生。</p>
+
+  <hr> <h3>我的目标</h3>
+  <ul style="text-align: left; display: inline-block;">
+    <li>✅ 提高自身英语能力</li>
+    <li>🚧 学习构建网页</li>
+    <li>📅 准备学习如何在网页上发表自己的游戏</li>
+  </ul>
+
+  <br><br>
+  <button onclick="alert('你点击了按钮！欢迎与我连接！')">点击这里联系我</button>
+</div>
+
+</body>
+</html>
