@@ -3,44 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XJM的个人主页</title>
+  <title>StarXUz的个人主页</title>
   <style>
-    /* 这里是CSS，用来控制网页长什么样 */
-    body {
-      font-family: 'Arial', sans-serif;
-      text-align: center;
+    /* 1. 关键！强制让 html 和 body 都变透明，防止浏览器默认白底挡路 */
+    html, body {
+      height: 100%;
       margin: 0;
       padding: 0;
-      /* 这一行很重要，防止视频溢出产生滚动条 */
+      background: none !important;       /* 关掉背景图片 */
+      background-color: transparent !important; /* 关掉背景颜色 */
       overflow-x: hidden;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
     }
-    /* 这是专门控制背景视频的 */
-    #bg-video {
-      position: fixed;  /* 固定在窗口，不随页面滚动 */
-      right: 0;
-      bottom: 0;
-      min-width: 100%;  /* 保证宽度撑满 */
-      min-height: 100%; /* 保证高度撑满 */
-      width: auto;
-      height: auto;
-      z-index: -100;    /* 关键！层级设为负数，让它乖乖待在最底层 */
-      object-fit: cover; /* 保证视频画面不被拉伸变形 */
 
-      /* 可选：给视频加一点暗色滤镜，让你的文字更清晰 (0.6就是60%亮度) */
-      filter: brightness(0.6);
+    /* 2. 视频样式：放在 -1 层 */
+    /* 视频背景专用样式 (修正版) */
+    #bg-video {
+      position: fixed;
+      top: 0; left: 0; /* 1. 钉在左上角，而不是右下角 */
+      width: 100%;     /* 2. 宽度强制撑满屏幕 */
+      height: 100%;    /* 3. 高度强制撑满屏幕 */
+      object-fit: cover; /* 4. 关键！像手机壁纸一样自动裁剪多余部分，保证画面填满 */
+      z-index: -1;     /* 5. 放在最底层 */
+
+      /* 6. 删掉了 filter: brightness(0.6); 让视频恢复原画亮度！ */
     }
-    h1 {
-      color: #333; /* 标题颜色 */
-    }
+
+    /* 3. 内容盒子：放在 1 层 (比视频高) */
+    /* 1. 容器：改成半透明黑色，配合暗黑背景 */
     .container {
-      /* 0.85 代表 85% 不透明度，你可以自己调 (0~1之间) */
-      background-color: rgba(255, 255, 255, 0.85);
+      /* 1. 纯净的半透明黑，不带模糊，通透感最强 */
+      /* 0.4 表示 40% 的黑色，能很清楚地看到背景 */
+      background-color: rgba(0, 0, 0, 0.4);
+
+      /* 2. 文字保持白色，确保在深色背景上能看清 */
+      color: #ffffff;
+
+      /* 3. 边框稍微淡一点，不要太抢眼 */
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      /* 其他布局保持不变 */
+      position: relative;
+      z-index: 1;
       width: 60%;
-      margin: 0 auto; /* 盒子居中 */
+      max-width: 800px;
+      margin: 80px auto;
       padding: 40px;
-      border-radius: 10px; /* 圆角看起来更现代 */
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 加一点阴影 */
+      border-radius: 15px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
+
+    /* 2. 标题颜色：改成纯白，带一点阴影 */
+    h1 {
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* 让标题在任何背景下都清晰 */
+      margin-bottom: 10px;
+    }
+
+    /* 3. 正文和列表颜色：改成稍微灰一点的白，拉开层次 */
+    p, li {
+      color: #e0e0e0; /* 浅灰色 */
+      font-size: 16px;
+      line-height: 1.8; /* 增加一点行高，让阅读更舒服 */
+    }
+
+    /* 防止图片也被挡住 */
+    img { position: relative; z-index: 1; }
+
     button {
       background-color: #f700ff;
       color: white;
@@ -50,18 +80,50 @@
       cursor: pointer;
       font-size: 16px;
     }
-    button:hover {
-      background-color: #0056b3; /* 鼠标放上去变色 */
+    button:hover { background-color: #0056b3; }
+    /* === 新增：暗黑项目卡片样式 === */
+    .project-card {
+      /* 1. 颜色：改成深灰半透明，不再刺眼 */
+      background-color: rgba(255, 255, 255, 0.1);
+
+      /* 2. 边框：加一个很细的亮边，增加高级感 */
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      /* 3. 间距：关键！给底部加 25px 的距离，把卡片撑开 */
+      margin-bottom: 25px;
+
+      /* 4. 内边距和圆角 */
+      padding: 20px;
+      border-radius: 12px;
+
+      /* 5. 文字颜色：白色 */
+      color: #e0e0e0;
+
+      /* 6. 过渡效果：鼠标放上去会有变化 */
+      transition: transform 0.3s, background-color 0.3s;
+    }
+
+    /* 鼠标悬停时，稍微亮一点，浮起来 */
+    .project-card:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px); /* 微微上浮 */
+    }
+
+    /* 修正卡片里标题的颜色 */
+    .project-card h3 {
+      color: #fff;
+      margin-top: 0;
     }
   </style>
 </head>
 <body>
 <video autoplay muted loop id="bg-video">
   <source src="video-bg.mp4" type="video/mp4">
+
 </video>
 <div class="container">
   <img src="avatar.jpg" alt="我的头像" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-  <h1>你好，我是 XJM 👋</h1>
+  <h1>你好，我是 StarXUz 👋</h1>
   <p>这是我从零开始构建的第一个个人网页。</p>
   <p>我是一名热衷于 java 和游戏开发的大学生。</p>
 
@@ -100,37 +162,31 @@
   </a>
   <hr> <h3>💻 我的项目经历</h3>
 
-  <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; text-align: left; margin-bottom: 15px; border-left: 5px solid #6f42c1;">
-    <h4 style="margin: 0; color: #333;">🎮 Unity and C# 双箭头 (复刻版)</h4>
-    <p style="font-size: 14px; color: #666; margin: 5px 0;">
-      正在开发中...<br>
-      使用 Unity 和  C# 构建的经典游戏复刻。
-    </p>
-    <span style="font-size: 12px; background-color: #eee; padding: 3px 8px; border-radius: 4px;">C#</span>
-    <span style="font-size: 12px; background-color: #eee; padding: 3px 8px; border-radius: 4px;">Game Dev</span>
+  <div class="project-card" style="border-left: 5px solid #7F52FF;">
+    <h3>🎮 Unity and C# 双箭头 (复刻版)</h3>
   </div>
 
-  <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; text-align: left; border-left: 5px solid #007bff;">
-    <h4 style="margin: 0; color: #333;">☕ Java 学习笔记</h4>
-    <p style="font-size: 14px; color: #666; margin: 5px 0;">
-      记录我在大学期间学习 Java 面向对象编程的心得。
-    </p>
-    <span style="font-size: 12px; background-color: #eee; padding: 3px 8px; border-radius: 4px;">Java</span>
-    <span style="font-size: 12px; background-color: #eee; padding: 3px 8px; border-radius: 4px;">Note</span>
+  <div class="project-card" style="border-left: 5px solid #4a90e2;">
+    <h3>☕ Java 学习笔记</h3>
   </div>
-  <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; text-align: left; margin-bottom: 15px; border-left: 5px solid #28a745;">
-    <h4 style="margin: 0; color: #333;">🌻 植物大战僵尸 (Dev)</h4> <p style="font-size: 14px; color: #666; margin: 5px 0;">
-    🚧 <b>WIP (Work In Progress)</b><br>
-    正在用 C 语言重构游戏底层逻辑。目前已实现植物选择与拖拽到草坪功能。
-    <br>
-    <a href="https://github.com/StarXUz/PvZ-C-Remake" target="_blank" style="color: #0366d6; text-decoration: none;">👉 围观我的开发进度</a>
-  </p>
-    <span style="font-size: 12px; background-color: #eee; padding: 3px 8px; border-radius: 4px;">C Language</span>
-    <span style="font-size: 12px; background-color: #ffd700; color: #000; padding: 3px 8px; border-radius: 4px;">Building...</span>
+
+  <div class="project-card"
+       onclick="window.open('https://github.com/StarXUz/PvZ-C-Remake')"
+       title="点击跳转到 GitHub 仓库"
+       style="border-left: 5px solid #28a745; cursor: pointer;">
+
+    <h3>🌻 植物大战僵尸 (Dev)</h3>
+
+    <p>🚧 WIP (Work In Progress)</p>
+    <p>正在用 C 语言重构游戏底层逻辑。目前已实现植物选择与拖拽到草坪功能。</p>
+
+    <span style="background:#ffc107; color:#000; padding:2px 8px; border-radius:4px; font-size:12px; font-weight:bold;">
+            Building...
+        </span>
   </div>
   <div style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px;">
     <p style="color: #aaa; font-size: 12px;">
-      © 2026 XJM. <br>
+      © 2026 StarXUz. <br>
       Powered by GitHub Pages & My Coding Passion.
     </p>
   </div>
